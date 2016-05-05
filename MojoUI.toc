@@ -1,0 +1,24 @@
+## Interface: 60200
+## Title: |cffff6600MojoUI|
+## Version: 0.1
+## Author: SamMojo,Saxitoxin,Phatso
+## Notes: A Design by SamMojo
+## OptionalDeps: SharedMedia
+
+
+#@no-lib-strip@
+libs\LibStub\LibStub.lua
+libs\CallbackHandler-1.0\CallbackHandler-1.0.xml
+libs\LibSharedMedia-3.0\LibSharedMedia-3.0.lua
+libs\AceAddon-3.0\AceAddon-3.0.xml
+libs\AceConfig-3.0\AceConfig-3.0.xml
+libs\AceGUI-3.0\AceGUI-3.0.xml
+#@end-no-lib-strip@
+
+
+init.lua
+defaults.lua
+MojoAPI\load_MojoAPI.xml
+media\load_media.xml
+modules\load_modules.xml
+
