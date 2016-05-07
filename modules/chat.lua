@@ -9,18 +9,12 @@ local MC = Mojo:NewModule("Chat")
 
 
 --Settings
-MC.Settings =  {
-	TABTEXTCOLOR = {1,1,1,0.75},
-	CHATFRAMEPADDING = 5,
-	CHATFRAMETABSPACING = 3,
-	TABHEIGHT = GeneralDockManager:GetHeight(),
-	TABFONT = LSM:Fetch("font","Homizio Black"),
-	TABFONTSIZE = 16,
-	TABFONTOUTLINE = "NONE",
-	CHATFONT = LSM:Fetch("font","Homizio Regular"),
-	CHATFONTSIZE = 10,
-	CHATFONTOUTLINE = "NONE",
-}
+local TABTEXTCOLOR = {1,1,1,0.75}
+local CHATFRAMEPADDING = 5
+local CHATFRAMETABSPACING = 3
+local TABHEIGHT = GeneralDockManager:GetHeight()
+
+
 
 
 
@@ -32,12 +26,11 @@ local function StripChat(cframe)
 						"TabMiddle","TabSelectedRight","TabHighlightRight",
 						"TabRight","TabSelectedLeft","TabHighlightLeft","TabLeft",
 						"RightTexture","LeftTexture","TopTexture","BottomTexture",
-						"TopRightTexture","TopLeftTexture","BottomLeftTexture","BottomRightTexture","Background",
+						"TopRightTexture","TopLeftTexture","BottomLeftTexture","BottomRightTexture","Background"
 	}
 	for _,Crap in pairs(uselessCraps) do
 		AdvancedMojo.KillFrame(_G[cframe..Crap])
 	end
-	
 end
 
 local function StyleChat(cframe)
@@ -51,8 +44,8 @@ local function StyleChat(cframe)
 	--Sets Content Window Backdrop and hides Borders
 	local ChatFrameBG = CreateFrame("Frame",cframe.."BG",ChatFrame)
 	ChatFrameBG:SetFrameLevel(ChatFrame:GetFrameLevel() - 1)
-	AdvancedMojo.AlignX(ChatFrameBG,ChatFrame,MC.Settings.CHATFRAMEPADDING)
-	AdvancedMojo.AlignY(ChatFrameBG,ChatFrame,MC.Settings.CHATFRAMEPADDING)
+	AdvancedMojo.AlignX(ChatFrameBG,ChatFrame,CHATFRAMEPADDING)
+	AdvancedMojo.AlignY(ChatFrameBG,ChatFrame,CHATFRAMEPADDING)
 	AdvancedMojo.SetBlankBD(ChatFrameBG)	
 	ChatFrameBG:SetBackdropColor(unpack(MS.Layout.BGColor))
 	ChatFrameBG:SetBackdropBorderColor(0,0,0,0)	
@@ -61,10 +54,10 @@ local function StyleChat(cframe)
 	--Fix ResizeButton
 	local ResizeButton = _G[cframe.."ResizeButton"]
 	ResizeButton:ClearAllPoints()
-	ResizeButton:SetPoint("BOTTOMRIGHT",2+MC.Settings.CHATFRAMEPADDING,-2-MC.Settings.CHATFRAMEPADDING)
+	ResizeButton:SetPoint("BOTTOMRIGHT",2+CHATFRAMEPADDING,-2-CHATFRAMEPADDING)
 	
 	--Set ChatFrame Font properties
-	ChatFrame:SetFont(MC.Settings.CHATFONT,MC.Settings.CHATFONTSIZE,MC.Settings.CHATFONTOUTLINE)
+	ChatFrame:SetFont(LSM:Fetch("font","Homizio Regular"),10,"NONE")
 	ChatFrame:SetShadowColor(0,0,0,0)
 	
 	--Create Frame Tab Background
@@ -80,56 +73,33 @@ local function StyleChat(cframe)
 	local TabText = _G[cframe.."TabText"]
 	TabText:ClearAllPoints()
 	TabText:SetPoint("CENTER")
-	TabText:SetFont(MC.Settings.TABFONT,16,MC.Settings.TABFONTOUTLINE)
+	TabText:SetFont(LSM:Fetch("font","Homizio Black"),16,"NONE")
 	TabText:SetShadowColor(0,0,0,0)
-	TabText:SetTextColor(unpack(MC.Settings.TABTEXTCOLOR))
+	TabText:SetTextColor(unpack(TABTEXTCOLOR))
 	hooksecurefunc("FCFTab_UpdateColors",function(...)
-		TabText:SetTextColor(unpack(MC.Settings.TABTEXTCOLOR))
+		TabText:SetTextColor(unpack(TABTEXTCOLOR))
 	end)
 	
 	-- Set Chat Tab Basic Properties
-	ChatTab:SetHeight(MC.Settings.TABHEIGHT)
-	ChatTab:SetPoint("BOTTOMLEFT",ChatFrame,"TOPLEFT",0,MC.Settings.CHATFRAMETABSPACING)
+	ChatTab:SetHeight(TABHEIGHT)
+	ChatTab:SetPoint("BOTTOMLEFT",ChatFrame,"TOPLEFT",0,CHATFRAMETABSPACING)
 end
 
 local function FixFloatingChatFrameBehavior()
 	--Reposition GeneralDockManager 
 	GENERAL_CHAT_DOCK:ClearAllPoints()
-	GENERAL_CHAT_DOCK:SetPoint("BOTTOMLEFT", ChatFrame1BG, "TOPLEFT", 0, MC.Settings.CHATFRAMETABSPACING)
+	GENERAL_CHAT_DOCK:SetPoint("BOTTOMLEFT", ChatFrame1BG, "TOPLEFT", 0, CHATFRAMETABSPACING)
 	GENERAL_CHAT_DOCK:SetWidth(ChatFrame1:GetWidth())
 
 	FCF_SetTabPosition = function(chatFrame, x)
 		local chatTab = _G[chatFrame:GetName().."Tab"];
 		chatTab:ClearAllPoints();
-		chatTab:SetPoint("BOTTOMLEFT", chatFrame:GetName().."BG", "TOPLEFT", x, MC.Settings.CHATFRAMETABSPACING);
+		chatTab:SetPoint("BOTTOMLEFT", chatFrame:GetName().."BG", "TOPLEFT", x, CHATFRAMETABSPACING);
 	end
 
 end
 
-local function StyleMinimizedChat()
-	hooksecurefunc("FCF_CreateMinimizedFrame",function(cFrame)
-		local cname = cFrame:GetName()
-		local moreuselessCraps = {
-			"MinimizedRightTexture","MinimizedLeftTexture","MinimizedMiddleTexture",
-			"MinimizedRightHighlightTexture","MinimizedLeftHighlightTexture","MinimizedMiddleHighlightTexture"	
-		}
-		for _,Crap in pairs(moreuselessCraps) do
-			AdvancedMojo.KillFrame(_G[cname..Crap])
-		end	
-		
-		local MiniFrame = _G[cname.."Minimized"]
-		AdvancedMojo.SetBlankBD(MiniFrame)
-		MiniFrame:SetBackdropColor(unpack(MS.Layout.AltBGColor))
-		MiniFrame:SetBackdropBorderColor(0,0,0,0)
-		MiniFrame:SetWidth(cFrame:GetWidth())
-		local MiniFrameText = _G[cname.."MinimizedText"]
-		MiniFrameText:SetFont(MC.Settings.TABFONT,MC.Settings.TABFONTSIZE,MC.Settings.TABFONTOUTLINE)
-		MiniFrameText:SetShadowColor(0,0,0,0)		
-		MiniFrameText:SetTextColor(unpack(MC.Settings.TABTEXTCOLOR))
-	end)
 
-
-end
 
 local function MakeEditBoxGreatAgain()
 	--Hides all EditBox Textures
@@ -150,25 +120,11 @@ local function MakeEditBoxGreatAgain()
 	AdvancedMojo.AlignX(ChatFrame1EditBox,ChatFrame1BG)
 	ChatFrame1EditBox:SetPoint("Top",ChatFrame1BG,"BOTTOM",0,-2)
 	ChatFrame1EditBox:SetPoint("BOTTOM",ChatFrame1BG,"BOTTOM",0,-27)
-	
-	
-	--Move Chat Frame Up and Down to make up for the EditBox	
-	local EditBoxHeight = ChatFrame1EditBox:GetHeight()
-	hooksecurefunc("ChatEdit_OnShow",function(self)
-		if(GetCVar("chatStyle") == "classic" and self:GetName() == "ChatFrame1EditBox") then 
-			AdvancedMojo.UPMove(ChatFrame1,0,EditBoxHeight)
-		end
-	end)
-	hooksecurefunc("ChatEdit_OnHide",function(self)
-		if(GetCVar("chatStyle") == "classic" and self:GetName() == "ChatFrame1EditBox") then 
-			AdvancedMojo.UPMove(ChatFrame1,0,-(EditBoxHeight))
-		end
-	end)
 end
 
 
 
-function MC:Mojoize() 	
+function MC:OnInitialize() 	
 	--Iterate through all chatframes, strip them and make the great again
 	for name,frame in pairs(CHAT_FRAMES) do	
 		StripChat(frame)
@@ -179,8 +135,8 @@ function MC:Mojoize()
 	AdvancedMojo.KillFrame(ChatFrameMenuButton)
 
 	
-	MakeEditBoxGreatAgain()	
+	MakeEditBoxGreatAgain()
+	
 	FixFloatingChatFrameBehavior()
-	StyleMinimizedChat()
 	
 end

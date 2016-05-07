@@ -18,8 +18,7 @@ libs\AceGUI-3.0\AceGUI-3.0.xml
 
 init.lua
 defaults.lua
-mojoapi\load_mojoapi.xml
+MojoAPI\load_MojoAPI.xml
 media\load_media.xml
 modules\load_modules.xml
-addonsupport\load_addonsupport.xml
 

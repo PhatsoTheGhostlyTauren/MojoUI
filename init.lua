@@ -6,7 +6,5 @@ Mojo.Settings = {}
 Mojo.API = {}
 
 function Mojo:OnInitialize()
-	for name, module in Mojo:IterateModules() do
-		module:Mojoize()
-	end
+
 end
