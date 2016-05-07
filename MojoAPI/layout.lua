@@ -66,4 +66,14 @@ end
 -----------------------------
 
 
+-----------------------------
+--Routines for User Placed Frames
+AdvancedMojo["UPMove"] = function(f,offsetX,offsetY)
+	local left,bottom,width,height = f:GetRect()
+	f:ClearAllPoints()
+	f:SetPoint("BOTTOMLEFT", f:GetParent(), left+offsetX, bottom+offsetY)
+	f:SetWidth(width)
+	f:SetHeight(height)
+end
+-----------------------------
 
