@@ -5,7 +5,7 @@ local AdvancedMojo = Mojo.API
 local MS = Mojo.Settings
 
 
-local MC = Mojo:NewModule("Chat")
+local MC = Mojo:NewModule("Chat",Mojo:GetPrototype())
 
 
 --Settings
@@ -156,12 +156,12 @@ local function MakeEditBoxGreatAgain()
 	local EditBoxHeight = ChatFrame1EditBox:GetHeight()
 	hooksecurefunc("ChatEdit_OnShow",function(self)
 		if(GetCVar("chatStyle") == "classic" and self:GetName() == "ChatFrame1EditBox") then 
-			AdvancedMojo.UPMove(ChatFrame1,0,EditBoxHeight)
+			AdvancedMojo.UPMove(ChatFrame1,0,2+EditBoxHeight)
 		end
 	end)
 	hooksecurefunc("ChatEdit_OnHide",function(self)
 		if(GetCVar("chatStyle") == "classic" and self:GetName() == "ChatFrame1EditBox") then 
-			AdvancedMojo.UPMove(ChatFrame1,0,-(EditBoxHeight))
+			AdvancedMojo.UPMove(ChatFrame1,0,-2 -(EditBoxHeight))
 		end
 	end)
 end

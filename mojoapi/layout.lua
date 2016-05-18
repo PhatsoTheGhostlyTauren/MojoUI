@@ -1,6 +1,6 @@
 local addon, private = ...
 local Mojo = LibStub("AceAddon-3.0"):GetAddon(addon)
-
+local LSM = LibStub("LibSharedMedia-3.0")
 local AdvancedMojo = Mojo.API
 
 
@@ -23,6 +23,7 @@ end
 
 
 -----------------------------
+--Palette-Mojo
 AdvancedMojo["SetBlankBD"] = function(f)
 	f:SetBackdrop({
 		bgFile = Mojo.Settings.Layout.BlankTex,  
@@ -76,4 +77,22 @@ AdvancedMojo["UPMove"] = function(f,offsetX,offsetY)
 	f:SetHeight(height)
 end
 -----------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

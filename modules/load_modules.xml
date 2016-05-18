@@ -1,4 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">	
-	<Script file="addonsupport.lua"/>
-	<Script file="Chat.lua"/>
+	<script file="addonsupport.lua"/>
+	<script file="addonsupport\load_addonsupport.xml"/>
+	<script file="Chat.lua"/>
+	<script file="tooltip.lua"/>
+	<include file="databar\load_databar.xml"/>
 </Ui>

@@ -1,0 +1,5 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">	
+	<Script file="databar.lua"/>
+	<Script file="armor.lua"/>	
+	<Script file="clock.lua"/>	
+</Ui>
