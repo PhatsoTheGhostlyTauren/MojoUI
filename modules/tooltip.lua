@@ -50,8 +50,8 @@ function TT:HandleTip(tooltip)
 	self:StyleTooltip(tooltip)
 	
 	--Make Sure the Tip Resets to the correct Visuals OnHide
-	tooltip:HookScript("OnHide", function(tip) self:StyleTooltip(tip) end)	
-	tooltip:HookScript("OnEnable", function(tip) self:StyleTooltip(tip) end)	
+	tooltip:HookScript("OnHide", function(tip) self:StyleTooltip(tip) end)		
+
 	
 	tooltip:HookScript("OnTooltipSetItem", function(tip) self:StyleItemTip(tip) end)
 	
@@ -74,6 +74,10 @@ function TT:Mojoize()
 			self:HandleTip( _G[tipName] )		
 		end
 	end
+	
+	
+	AdvancedMojo.DoOneFrameLater(GameTooltip,"SetOwner",function() self:StyleTooltip(GameTooltip) end)
+	
 end
 
 
