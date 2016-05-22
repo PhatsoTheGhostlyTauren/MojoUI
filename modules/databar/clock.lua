@@ -28,7 +28,7 @@ local elapsed = 0
 
 --Because #wowuidev said so
 local str = string
-str.format = string.format
+local str.format = str.format
 local dat = date
 
 function Clock:Update(e)
